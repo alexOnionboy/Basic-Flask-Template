@@ -34,23 +34,13 @@ def logout():
     session.clear()
     return redirect('/login')
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register')
 def register():
-    if request.method == "POST":
-        email = request.form.get('email')
-        password = request.form.get('password')
-        firstname = request.form.get('firstname')
-        lastname = request.form.get('lastname')
-        confirm_password = request.form.get('confirm_password')
-
     app.logger.info("Register")
-    return render_template('register.html')
+    return "Registration Page"
 
 @app.route('/home')
 def home():
-    if 'permission' in session:
-        if session['permission'] == 'admin':
-            return "All glory to the administrator!"
     app.logger.info("Home")
     return "Home"
 
@@ -58,6 +48,9 @@ def home():
 def admin():
     app.logger.info("admin")
     return "Admin"
+
+
+
 
 #main method called web server application
 if __name__ == '__main__':
