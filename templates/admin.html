@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Admin</h1>
+    <p>Welcome, {{ session.name }}!</p>
+    <form action="/admin" method="post">
+        <h2>Manage Users</h2>
+        <table>
+            <tr>
+                <th>Select</th>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Permission</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td><input type="checkbox" name="selectedusers" value="{{ user.userid }}"></td>
+                <td>{{ user.userid }}</td>
+                <td>{{ user.firstname }} {{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.permission }}</td>
+            </tr>
+            {% endfor %}
+        </table><br><br>
+        <input type="submit" value="Delete Selected Users">
+    </form>
+    
+{% endblock %}
