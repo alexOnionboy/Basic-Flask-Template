@@ -19,5 +19,24 @@ CREATE TABLE messages (
    FOREIGN KEY(author) REFERENCES users(userid) ON DELETE CASCADE
 );
 
+CREATE TABLE gaming_teams (
+   teamid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   teamname TEXT NOT NULL,
+   serverlocation TEXT NOT NULL,
+   points INTEGER NOT NULL DEFAULT 0,
+   gamename TEXT NOT NULL
+);
+
+CREATE TABLE user_gaming_teams (
+   userid INTEGER NOT NULL,
+   teamid INTEGER NOT NULL,
+   PRIMARY KEY (userid, teamid),
+   FOREIGN KEY(userid) REFERENCES users(userid) ON DELETE CASCADE,
+   FOREIGN KEY(teamid) REFERENCES gaming_teams(teamid) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_user_gaming_teams_teamid
+   ON user_gaming_teams(teamid);
+
 INSERT INTO users (email, firstname, lastname, password, permission) values
 ('admin@admin', 'Firstname', 'Lastname', 'admin', 'admin');
